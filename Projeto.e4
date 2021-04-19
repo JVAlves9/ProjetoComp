@@ -1,13 +1,15 @@
 grammar Projeto;
 //protótipo da gramática do projeto, sujeito a mudanças
 
+start: config+ EOF;
+
 config: '[' TITLE ']' '\n' (expr '\n')+ '\n';
 
 expr: VAR '=' VTEXT
     | VAR '=' VNUM
     ;
 
-VAR: ('[A-Z]'* )+;
-VTEXT: '[A-Z]';
-VNUM: '+';
-TITLE: 'sdad';
+VAR: [A-Za-z]+;
+VTEXT: [A-Za-z0-9]+;
+VNUM: [0-9]+;
+TITLE: [a-z]+;
