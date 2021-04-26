@@ -1,0 +1,22 @@
+Arquivo para descrição do projeto da disciplina
+de compiladores. 
+
+Este arquivo deve possuir PELO MENOS as seguintes seções:
+
+1- Equipe do projeto
+
+  João Victor Alves
+  Thiago Porfírio
+  
+2- Motivação
+
+  É bastante trabalhoso retirar configurações de um .ini, mesmo com a biblioteca certa. Em python a configparser ajuda bastante, mas não há algo nativo em java que faça o mesmo.
+  No nosso trabalho, estamos sempre nos deparando com a situação de retirar informações de configuração de um .ini, exigindo bastante reescrita de código. 
+
+3- Exemplos da Linguagem e do Resultado Esperado
+
+4 - Gramática da Linguagem
+
+5 - Descrição do Processo de Geração de Código ou execução
+
+6 - Manual de uso do software.
