@@ -1,6 +1,12 @@
 grammar DLS;
 
-start: 'from' NAME 'load' options?;
+start: load EOF;
+
+load: 
+  'from' NAME 'load'#LoadConfig         //le todas as configs de todos os devices
+| 'from' NAME 'in' NAME 'load' options#LoadWithOptions    //le algumas configs de um device
+| 'from' NAME 'in' options#LoadSpecificConfigs//le todas as configs de alguns devices
+;
 
 options: 
    (NAME ' ')* NAME
