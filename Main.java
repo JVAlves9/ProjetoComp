@@ -23,7 +23,20 @@ class Main {
     HashMap<String,ArrayList> sla = avalieConfig(com,s);
     System.out.println(sla);
   }
-  public static HashMap avalie(ParseTree start){
+  public static ParseTree getParser(String fileName) throws Exception{  //gets the tree of the file read
+    CharStream src = CharStreams.fromFileName(fileName);
+    ProjetoLexer lexer = new ProjetoLexer(src);
+    TokenStream tkStream = new CommonTokenStream(lexer);
+    ProjetoParser parser = new ProjetoParser(tkStream);
+    ProjetoParser.StartContext result = parser.start();
+
+    if(parser.getNumberOfSyntaxErrors()>0) {
+      System.out.println("entrada errada");
+      return null;
+	  }
+    return result;
+  }
+  public static HashMap avalie(ParseTree start){ // gets all devices from .ini
     HashMap<String,HashMap> r = new HashMap<>();
     if(start instanceof ProjetoParser.StartContext){
       for(int i = 0; i <start.getChildCount()-1; i++){
@@ -35,7 +48,7 @@ class Main {
     }
     return r;
   }
-  public static HashMap avalie(ParseTree start, String[] args){
+  public static HashMap avalie(ParseTree start, String[] args){ //gets the especified devices from .ini
     HashMap<String,HashMap> r = new HashMap<>();
     if(start instanceof ProjetoParser.StartContext){
       for(int i = 0; i <start.getChildCount()-1; i++){
@@ -50,12 +63,12 @@ class Main {
     }
     return r;
   }
-  public static HashMap avalieConfig(ParseTree config){
+  public static HashMap avalieConfig(ParseTree config){ //gets all configs from a device
     HashMap<String,ArrayList> r = new HashMap<>();
     avalieConfigRec(config,r);
     return r;
   }
-  public static HashMap avalieConfig(ParseTree config, String[] args){
+  public static HashMap avalieConfig(ParseTree config, String[] args){  //gets specified configs from a device
     HashMap<String,ArrayList> r = new HashMap<>();
     avalieConfigRec(config,r,args);
     return r;

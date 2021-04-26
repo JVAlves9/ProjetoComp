@@ -1,3 +1,12 @@
 grammar DLS;
 
-start: 'from' NAME 'load' NAME?;
+start: 'from' NAME 'load' options?;
+
+options: 
+   (NAME ' ')* NAME
+  ;
+
+NAME    : ([A-Za-z0-9]SPECIAL_CHARS*)+;
+BLANK   : ( ' ' | '\n' | '\t' )+  -> skip ;
+
+fragment SPECIAL_CHARS : '_' | '-' | '$' | '@' | '&' | '/' | '\\' | '.' | ':';
