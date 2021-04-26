@@ -63,13 +63,25 @@ public class ProjetoBaseListener implements ProjetoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValor(ProjetoParser.ValorContext ctx) { }
+	@Override public void enterNames(ProjetoParser.NamesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValor(ProjetoParser.ValorContext ctx) { }
+	@Override public void exitNames(ProjetoParser.NamesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNum(ProjetoParser.NumContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNum(ProjetoParser.NumContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

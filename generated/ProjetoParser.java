@@ -356,39 +356,66 @@ public class ProjetoParser extends Parser {
 	}
 
 	public static class ValorContext extends ParserRuleContext {
-		public TerminalNode NAMES() { return getToken(ProjetoParser.NAMES, 0); }
-		public TerminalNode VNUM() { return getToken(ProjetoParser.VNUM, 0); }
 		public ValorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_valor; }
+	 
+		public ValorContext() { }
+		public void copyFrom(ValorContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class NamesContext extends ValorContext {
+		public TerminalNode NAMES() { return getToken(ProjetoParser.NAMES, 0); }
+		public NamesContext(ValorContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjetoListener ) ((ProjetoListener)listener).enterValor(this);
+			if ( listener instanceof ProjetoListener ) ((ProjetoListener)listener).enterNames(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjetoListener ) ((ProjetoListener)listener).exitValor(this);
+			if ( listener instanceof ProjetoListener ) ((ProjetoListener)listener).exitNames(this);
+		}
+	}
+	public static class NumContext extends ValorContext {
+		public TerminalNode VNUM() { return getToken(ProjetoParser.VNUM, 0); }
+		public NumContext(ValorContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoListener ) ((ProjetoListener)listener).enterNum(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoListener ) ((ProjetoListener)listener).exitNum(this);
 		}
 	}
 
 	public final ValorContext valor() throws RecognitionException {
 		ValorContext _localctx = new ValorContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_valor);
-		int _la;
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(46);
-			_la = _input.LA(1);
-			if ( !(_la==NAMES || _la==VNUM) ) {
-			_errHandler.recoverInline(this);
-			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
+			setState(48);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case NAMES:
+				_localctx = new NamesContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(46);
+				match(NAMES);
+				}
+				break;
+			case VNUM:
+				_localctx = new NumContext(_localctx);
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(47);
+				match(VNUM);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -403,20 +430,21 @@ public class ProjetoParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\13\63\4\2\t\2\4\3"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\13\65\4\2\t\2\4\3"+
 		"\t\3\4\4\t\4\4\5\t\5\3\2\6\2\f\n\2\r\2\16\2\r\3\2\3\2\3\3\3\3\3\3\3\3"+
 		"\3\3\3\3\3\3\3\3\6\3\32\n\3\r\3\16\3\33\3\3\5\3\37\n\3\3\4\3\4\3\4\3\4"+
-		"\3\4\3\4\3\4\3\4\6\4)\n\4\r\4\16\4*\3\4\3\4\5\4/\n\4\3\5\3\5\3\5\2\2\6"+
-		"\2\4\6\b\2\3\3\2\b\t\2\64\2\13\3\2\2\2\4\21\3\2\2\2\6.\3\2\2\2\b\60\3"+
-		"\2\2\2\n\f\5\4\3\2\13\n\3\2\2\2\f\r\3\2\2\2\r\13\3\2\2\2\r\16\3\2\2\2"+
-		"\16\17\3\2\2\2\17\20\7\2\2\3\20\3\3\2\2\2\21\22\7\3\2\2\22\23\7\b\2\2"+
-		"\23\24\7\4\2\2\24\31\7\5\2\2\25\26\5\6\4\2\26\27\7\5\2\2\27\32\3\2\2\2"+
-		"\30\32\5\6\4\2\31\25\3\2\2\2\31\30\3\2\2\2\32\33\3\2\2\2\33\31\3\2\2\2"+
-		"\33\34\3\2\2\2\34\36\3\2\2\2\35\37\7\5\2\2\36\35\3\2\2\2\36\37\3\2\2\2"+
-		"\37\5\3\2\2\2 !\7\b\2\2!\"\7\6\2\2\"/\5\b\5\2#$\7\b\2\2$(\7\6\2\2%&\5"+
-		"\b\5\2&\'\7\7\2\2\')\3\2\2\2(%\3\2\2\2)*\3\2\2\2*(\3\2\2\2*+\3\2\2\2+"+
-		",\3\2\2\2,-\5\b\5\2-/\3\2\2\2. \3\2\2\2.#\3\2\2\2/\7\3\2\2\2\60\61\t\2"+
-		"\2\2\61\t\3\2\2\2\b\r\31\33\36*.";
+		"\3\4\3\4\3\4\3\4\6\4)\n\4\r\4\16\4*\3\4\3\4\5\4/\n\4\3\5\3\5\5\5\63\n"+
+		"\5\3\5\2\2\6\2\4\6\b\2\2\2\67\2\13\3\2\2\2\4\21\3\2\2\2\6.\3\2\2\2\b\62"+
+		"\3\2\2\2\n\f\5\4\3\2\13\n\3\2\2\2\f\r\3\2\2\2\r\13\3\2\2\2\r\16\3\2\2"+
+		"\2\16\17\3\2\2\2\17\20\7\2\2\3\20\3\3\2\2\2\21\22\7\3\2\2\22\23\7\b\2"+
+		"\2\23\24\7\4\2\2\24\31\7\5\2\2\25\26\5\6\4\2\26\27\7\5\2\2\27\32\3\2\2"+
+		"\2\30\32\5\6\4\2\31\25\3\2\2\2\31\30\3\2\2\2\32\33\3\2\2\2\33\31\3\2\2"+
+		"\2\33\34\3\2\2\2\34\36\3\2\2\2\35\37\7\5\2\2\36\35\3\2\2\2\36\37\3\2\2"+
+		"\2\37\5\3\2\2\2 !\7\b\2\2!\"\7\6\2\2\"/\5\b\5\2#$\7\b\2\2$(\7\6\2\2%&"+
+		"\5\b\5\2&\'\7\7\2\2\')\3\2\2\2(%\3\2\2\2)*\3\2\2\2*(\3\2\2\2*+\3\2\2\2"+
+		"+,\3\2\2\2,-\5\b\5\2-/\3\2\2\2. \3\2\2\2.#\3\2\2\2/\7\3\2\2\2\60\63\7"+
+		"\b\2\2\61\63\7\t\2\2\62\60\3\2\2\2\62\61\3\2\2\2\63\t\3\2\2\2\t\r\31\33"+
+		"\36*.\62";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

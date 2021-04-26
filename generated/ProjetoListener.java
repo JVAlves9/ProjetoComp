@@ -53,13 +53,27 @@ public interface ProjetoListener extends ParseTreeListener {
 	 */
 	void exitAtribuicaoLista(ProjetoParser.AtribuicaoListaContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProjetoParser#valor}.
+	 * Enter a parse tree produced by the {@code Names}
+	 * labeled alternative in {@link ProjetoParser#valor}.
 	 * @param ctx the parse tree
 	 */
-	void enterValor(ProjetoParser.ValorContext ctx);
+	void enterNames(ProjetoParser.NamesContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ProjetoParser#valor}.
+	 * Exit a parse tree produced by the {@code Names}
+	 * labeled alternative in {@link ProjetoParser#valor}.
 	 * @param ctx the parse tree
 	 */
-	void exitValor(ProjetoParser.ValorContext ctx);
+	void exitNames(ProjetoParser.NamesContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Num}
+	 * labeled alternative in {@link ProjetoParser#valor}.
+	 * @param ctx the parse tree
+	 */
+	void enterNum(ProjetoParser.NumContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Num}
+	 * labeled alternative in {@link ProjetoParser#valor}.
+	 * @param ctx the parse tree
+	 */
+	void exitNum(ProjetoParser.NumContext ctx);
 }

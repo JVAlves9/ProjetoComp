@@ -1,5 +1,4 @@
 grammar Projeto;
-//protótipo da gramática do projeto, sujeito a mudanças
 
 start: config+ EOF;
 
@@ -9,8 +8,8 @@ expr: NAMES '=' valor   #Atribuicao
     | NAMES '=' (valor ',')+ valor  #AtribuicaoLista
     ;
 
-valor: NAMES
-    |  VNUM
+valor: NAMES  #Names
+    |  VNUM   #Num
     ;
 
 NAMES   : ([A-Za-z0-9]SPECIAL_CHARS*)+;
