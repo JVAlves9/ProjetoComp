@@ -18,17 +18,17 @@ public class DLSParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, NAME=5, BLANK=6;
 	public static final int
-		RULE_start = 0, RULE_load = 1, RULE_options = 2;
+		RULE_start = 0, RULE_loadfile = 1, RULE_load = 2, RULE_options = 3;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"start", "load", "options"
+			"start", "loadfile", "load", "options"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'from'", "'load'", "'in'", "' '"
+			null, "'from'", "' '", "'load'", "'in'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -89,8 +89,8 @@ public class DLSParser extends Parser {
 	}
 
 	public static class StartContext extends ParserRuleContext {
-		public LoadContext load() {
-			return getRuleContext(LoadContext.class,0);
+		public LoadfileContext loadfile() {
+			return getRuleContext(LoadfileContext.class,0);
 		}
 		public TerminalNode EOF() { return getToken(DLSParser.EOF, 0); }
 		public StartContext(ParserRuleContext parent, int invokingState) {
@@ -113,10 +113,58 @@ public class DLSParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(6);
-			load();
-			setState(7);
+			setState(8);
+			loadfile();
+			setState(9);
 			match(EOF);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class LoadfileContext extends ParserRuleContext {
+		public TerminalNode NAME() { return getToken(DLSParser.NAME, 0); }
+		public LoadContext load() {
+			return getRuleContext(LoadContext.class,0);
+		}
+		public LoadfileContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_loadfile; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof DLSListener ) ((DLSListener)listener).enterLoadfile(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof DLSListener ) ((DLSListener)listener).exitLoadfile(this);
+		}
+	}
+
+	public final LoadfileContext loadfile() throws RecognitionException {
+		LoadfileContext _localctx = new LoadfileContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_loadfile);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(11);
+			match(T__0);
+			setState(12);
+			match(T__1);
+			setState(13);
+			match(NAME);
+			setState(14);
+			match(T__1);
+			setState(15);
+			load();
 			}
 		}
 		catch (RecognitionException re) {
@@ -142,7 +190,6 @@ public class DLSParser extends Parser {
 		}
 	}
 	public static class LoadSpecificConfigsContext extends LoadContext {
-		public TerminalNode NAME() { return getToken(DLSParser.NAME, 0); }
 		public OptionsContext options() {
 			return getRuleContext(OptionsContext.class,0);
 		}
@@ -157,7 +204,6 @@ public class DLSParser extends Parser {
 		}
 	}
 	public static class LoadConfigContext extends LoadContext {
-		public TerminalNode NAME() { return getToken(DLSParser.NAME, 0); }
 		public LoadConfigContext(LoadContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -169,10 +215,7 @@ public class DLSParser extends Parser {
 		}
 	}
 	public static class LoadWithOptionsContext extends LoadContext {
-		public List<TerminalNode> NAME() { return getTokens(DLSParser.NAME); }
-		public TerminalNode NAME(int i) {
-			return getToken(DLSParser.NAME, i);
-		}
+		public TerminalNode NAME() { return getToken(DLSParser.NAME, 0); }
 		public OptionsContext options() {
 			return getRuleContext(OptionsContext.class,0);
 		}
@@ -189,38 +232,36 @@ public class DLSParser extends Parser {
 
 	public final LoadContext load() throws RecognitionException {
 		LoadContext _localctx = new LoadContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_load);
+		enterRule(_localctx, 4, RULE_load);
 		try {
-			setState(22);
+			setState(28);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 			case 1:
 				_localctx = new LoadConfigContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(9);
-				match(T__0);
-				setState(10);
-				match(NAME);
-				setState(11);
-				match(T__1);
+				setState(17);
+				match(T__2);
 				}
 				break;
 			case 2:
 				_localctx = new LoadWithOptionsContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(12);
-				match(T__0);
-				setState(13);
-				match(NAME);
-				setState(14);
-				match(T__2);
-				setState(15);
-				match(NAME);
-				setState(16);
+				setState(18);
+				match(T__3);
+				setState(19);
 				match(T__1);
-				setState(17);
+				setState(20);
+				match(NAME);
+				setState(21);
+				match(T__1);
+				setState(22);
+				match(T__2);
+				setState(23);
+				match(T__1);
+				setState(24);
 				options();
 				}
 				break;
@@ -228,13 +269,11 @@ public class DLSParser extends Parser {
 				_localctx = new LoadSpecificConfigsContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(18);
-				match(T__0);
-				setState(19);
-				match(NAME);
-				setState(20);
-				match(T__2);
-				setState(21);
+				setState(25);
+				match(T__3);
+				setState(26);
+				match(T__1);
+				setState(27);
 				options();
 				}
 				break;
@@ -272,30 +311,30 @@ public class DLSParser extends Parser {
 
 	public final OptionsContext options() throws RecognitionException {
 		OptionsContext _localctx = new OptionsContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_options);
+		enterRule(_localctx, 6, RULE_options);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(28);
+			setState(34);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(24);
+					setState(30);
 					match(NAME);
-					setState(25);
-					match(T__3);
+					setState(31);
+					match(T__1);
 					}
 					} 
 				}
-				setState(30);
+				setState(36);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
 			}
-			setState(31);
+			setState(37);
 			match(NAME);
 			}
 		}
@@ -311,16 +350,17 @@ public class DLSParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\b$\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
-		"\3\3\5\3\31\n\3\3\4\3\4\7\4\35\n\4\f\4\16\4 \13\4\3\4\3\4\3\4\2\2\5\2"+
-		"\4\6\2\2\2#\2\b\3\2\2\2\4\30\3\2\2\2\6\36\3\2\2\2\b\t\5\4\3\2\t\n\7\2"+
-		"\2\3\n\3\3\2\2\2\13\f\7\3\2\2\f\r\7\7\2\2\r\31\7\4\2\2\16\17\7\3\2\2\17"+
-		"\20\7\7\2\2\20\21\7\5\2\2\21\22\7\7\2\2\22\23\7\4\2\2\23\31\5\6\4\2\24"+
-		"\25\7\3\2\2\25\26\7\7\2\2\26\27\7\5\2\2\27\31\5\6\4\2\30\13\3\2\2\2\30"+
-		"\16\3\2\2\2\30\24\3\2\2\2\31\5\3\2\2\2\32\33\7\7\2\2\33\35\7\6\2\2\34"+
-		"\32\3\2\2\2\35 \3\2\2\2\36\34\3\2\2\2\36\37\3\2\2\2\37!\3\2\2\2 \36\3"+
-		"\2\2\2!\"\7\7\2\2\"\7\3\2\2\2\4\30\36";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\b*\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\4\3\4\3\4\3\4"+
+		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4\37\n\4\3\5\3\5\7\5#\n\5\f\5\16\5&\13"+
+		"\5\3\5\3\5\3\5\2\2\6\2\4\6\b\2\2\2(\2\n\3\2\2\2\4\r\3\2\2\2\6\36\3\2\2"+
+		"\2\b$\3\2\2\2\n\13\5\4\3\2\13\f\7\2\2\3\f\3\3\2\2\2\r\16\7\3\2\2\16\17"+
+		"\7\4\2\2\17\20\7\7\2\2\20\21\7\4\2\2\21\22\5\6\4\2\22\5\3\2\2\2\23\37"+
+		"\7\5\2\2\24\25\7\6\2\2\25\26\7\4\2\2\26\27\7\7\2\2\27\30\7\4\2\2\30\31"+
+		"\7\5\2\2\31\32\7\4\2\2\32\37\5\b\5\2\33\34\7\6\2\2\34\35\7\4\2\2\35\37"+
+		"\5\b\5\2\36\23\3\2\2\2\36\24\3\2\2\2\36\33\3\2\2\2\37\7\3\2\2\2 !\7\7"+
+		"\2\2!#\7\4\2\2\" \3\2\2\2#&\3\2\2\2$\"\3\2\2\2$%\3\2\2\2%\'\3\2\2\2&$"+
+		"\3\2\2\2\'(\7\7\2\2(\t\3\2\2\2\4\36$";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

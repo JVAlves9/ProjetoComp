@@ -17,6 +17,16 @@ public interface DLSListener extends ParseTreeListener {
 	 */
 	void exitStart(DLSParser.StartContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DLSParser#loadfile}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoadfile(DLSParser.LoadfileContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DLSParser#loadfile}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoadfile(DLSParser.LoadfileContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code LoadConfig}
 	 * labeled alternative in {@link DLSParser#load}.
 	 * @param ctx the parse tree

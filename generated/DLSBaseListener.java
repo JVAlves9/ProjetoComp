@@ -27,6 +27,18 @@ public class DLSBaseListener implements DLSListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLoadfile(DLSParser.LoadfileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLoadfile(DLSParser.LoadfileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLoadConfig(DLSParser.LoadConfigContext ctx) { }
 	/**
 	 * {@inheritDoc}
