@@ -119,4 +119,13 @@ class ConfigParser {
       }
     }
   }
+  public static ParseTree findSession(ParseTree start, String session){
+    for(int i=0; i < start.getChildCount()-1 ; i++){
+      String name = start.getChild(i).getChild(1).getText();
+      if( name.equals(session) ){
+        return start.getChild(i);
+      }
+    }
+    return null;
+  }
 }
