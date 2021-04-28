@@ -7,22 +7,8 @@ import java.nio.file.NoSuchFileException;
 
 class Main {
   public static void main(String[] args) throws Exception {
-    CharStream src = CharStreams.fromString("from config.ini in device_1 load ip pass");
-    DLSLexer lexer = new DLSLexer(src);
-    TokenStream tkStream = new CommonTokenStream(lexer);
-    DLSParser parser = new DLSParser(tkStream);
-    DLSParser.StartContext result = parser.start();
-    DLSParser.LoadfileContext lf = result.loadfile();
     
-   // Na linha de baixo ele cria o hashmap pra armazenar e chama a função pra armazenar de acordo com o comando
-   
-
-    if(parser.getNumberOfSyntaxErrors()>0) {
-      System.out.println("entrada errada");
-      return;
-	  }
-    HashMap<String,HashMap> arqui = avalieDls(lf);
-    System.out.println(arqui);
+    HashMap<String,HashMap> arquivoLido = salvaIni("from config.ini in device_1 load ip pass");
 
     ParseTree com = ConfigParser.getParser("config.ini");
 
@@ -31,6 +17,24 @@ class Main {
     
     
   }
+
+public static HashMap salvaIni(String coman){
+    CharStream src = CharStreams.fromString(coman);
+    DLSLexer lexer = new DLSLexer(src);
+    TokenStream tkStream = new CommonTokenStream(lexer);
+    DLSParser parser = new DLSParser(tkStream);
+    DLSParser.StartContext result = parser.start();
+    DLSParser.LoadfileContext lf = result.loadfile();
+    if(parser.getNumberOfSyntaxErrors()>0) {
+      System.out.println("entrada errada");
+      return null;
+	  }
+// Na linha de baixo ele cria o hashmap pra armazenar e chama a função pra armazenar de acordo com o comando
+    HashMap<String,HashMap> arqui = avalieDls(lf);
+    System.out.println(arqui);
+return arqui;
+}
+
 
   static HashMap avalieDls(DLSParser.LoadfileContext exp){
     HashMap<String,HashMap> r = new HashMap<>();
