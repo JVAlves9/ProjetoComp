@@ -5,7 +5,7 @@ start: loadfile EOF;
 loadfile: 'from' ' ' NAME ' ' load;
 
 load:  'load'#LoadConfig         //le todas as configs de todos os seção - avalie()
-| 'in' ' ' NAME ' ' 'load' ' ' options#LoadWithOptions    //le algumas configs de um seção - avalieConfig( args[])
+| 'in' ' ' NAME ' ' 'load' ' ' options#LoadWithOptions    //le algumas configs de uma seção - avalieConfig( args[])
 | 'in' ' ' options#LoadSpecificConfigs//le todas as configs de algumas seções - avalie(args[])
 ;
 
