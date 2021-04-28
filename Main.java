@@ -7,7 +7,7 @@ import java.nio.file.NoSuchFileException;
 
 class Main {
   public static void main(String[] args) throws Exception {
-    CharStream src = CharStreams.fromString("from config.ini in device_1 load ip");
+    CharStream src = CharStreams.fromString("from config.ini in device_1 device_2");
     DLSLexer lexer = new DLSLexer(src);
     TokenStream tkStream = new CommonTokenStream(lexer);
     DLSParser parser = new DLSParser(tkStream);
