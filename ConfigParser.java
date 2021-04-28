@@ -67,24 +67,23 @@ class ConfigParser {
   }
   private static void avalieConfigRec(ParseTree config, HashMap<String,ArrayList> data){
 
-    if(config instanceof ProjetoParser.DeviceConfigContext){
+    if(config instanceof ProjetoParser.DeviceConfigContext){//passes all children of the config to be analyzed
       for(int i = 0; i <config.getChildCount(); i++){
         avalieConfigRec(config.getChild(i), data);
       }
     }
-    if(config instanceof ProjetoParser.AtribuicaoContext){
+    if(config instanceof ProjetoParser.AtribuicaoContext){// loads the simple variable value
       String name   = config.getChild(0).getText();
       String value  = config.getChild(2).getText();
       ArrayList<String> d = new ArrayList<>();
       d.add(value);
       data.put(name,d);
     }
-    if( config instanceof ProjetoParser.AtribuicaoListaContext){
+    if( config instanceof ProjetoParser.AtribuicaoListaContext){//loads a list of values associated with a variable
       String name   = config.getChild(0).getText();
-      String value  = config.getChild(2).getText();
       ArrayList<String> d = new ArrayList<>();
-      for(String v:value.split(",")){
-        d.add(v);
+      for (int i = 2; i < config.getChildCount() ; i+=2){
+        d.add(config.getChild(i).getText());
       }
       data.put(name,d);
     }
@@ -93,7 +92,7 @@ class ConfigParser {
 
     if(config instanceof ProjetoParser.DeviceConfigContext){
       for(int i = 0; i <config.getChildCount(); i++){
-        avalieConfigRec(config.getChild(i), data,args);
+        avalieConfigRec(config.getChild(i), data, args);
       }
     }
     if(config instanceof ProjetoParser.AtribuicaoContext){
@@ -110,16 +109,15 @@ class ConfigParser {
       String name   = config.getChild(0).getText();
       boolean contains = Arrays.stream(args).anyMatch(name::equals);
       if(contains){
-        String value  = config.getChild(2).getText();
         ArrayList<String> d = new ArrayList<>();
-        for(String v:value.split(",")){
-          d.add(v);
+        for (int i = 2; i < config.getChildCount() ; i+=2){
+          d.add(config.getChild(i).getText());
         }
         data.put(name,d);
       }
     }
   }
-  public static ParseTree findSession(ParseTree start, String session){
+  public static ParseTree findSession(ParseTree start, String session){// finds a specified session and returns its tree
     for(int i=0; i < start.getChildCount()-1 ; i++){
       String name = start.getChild(i).getChild(1).getText();
       if( name.equals(session) ){

@@ -7,7 +7,7 @@ import java.nio.file.NoSuchFileException;
 
 class Main {
   public static void main(String[] args) throws Exception {
-    CharStream src = CharStreams.fromString("from config.ini in device_1");
+    CharStream src = CharStreams.fromString("from config.ini in device_1 load ip");
     DLSLexer lexer = new DLSLexer(src);
     TokenStream tkStream = new CommonTokenStream(lexer);
     DLSParser parser = new DLSParser(tkStream);
@@ -30,7 +30,7 @@ class Main {
     ParseTree com = ConfigParser.getParser("config.ini");
 
     HashMap<String,HashMap> h = ConfigParser.avalie(com);
-    
+    System.out.println(h);
     
     
   }
@@ -45,13 +45,12 @@ class Main {
     if (exp.load() instanceof DLSParser.LoadWithOptionsContext) {
       
      ParseTree com = ConfigParser.getParser(exp.getChild(2).getText());
-      
       String configs[]={exp.load().getChild(6).getText()};
       r= ConfigParser.avalieConfig(ConfigParser.findSession(com, exp.load().getChild(2).getText()), configs); 
       return r;
     }
     if (exp.load() instanceof DLSParser.LoadSpecificConfigsContext) {
-      System.out.println("DEU BOM");
+      
       ParseTree com = ConfigParser.getParser(exp.getChild(2).getText());
       String sessions[] = {exp.load().getChild(2).getText()};
       r= ConfigParser.avalie(com, sessions);
