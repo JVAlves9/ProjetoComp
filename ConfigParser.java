@@ -28,8 +28,8 @@ class ConfigParser {
 	  }
     return result;
   }
-  public static HashMap avalie(ParseTree start){ // gets all devices from .ini
-    HashMap<String,HashMap> r = new HashMap<>();
+  public static HashMap<String,HashMap<String,ArrayList<String>>> avalie(ParseTree start){ // gets all devices from .ini
+    HashMap<String,HashMap<String,ArrayList<String>>> r = new HashMap<>();
     if(start instanceof ProjetoParser.StartContext){
       for(int i = 0; i <start.getChildCount()-1; i++){
         String name = start.getChild(i).getChild(1).getText();
@@ -40,8 +40,8 @@ class ConfigParser {
     }
     return r;
   }
-  public static HashMap avalie(ParseTree start, String[] args){ //gets the especified devices from .ini
-    HashMap<String,HashMap> r = new HashMap<>();
+  public static HashMap<String,HashMap<String,ArrayList<String>>> avalie(ParseTree start, String[] args){ //gets the especified devices from .ini
+    HashMap<String,HashMap<String,ArrayList<String>>> r = new HashMap<>();
     if(start instanceof ProjetoParser.StartContext){
       for(int i = 0; i <start.getChildCount()-1; i++){
         String name = start.getChild(i).getChild(1).getText();
@@ -55,12 +55,12 @@ class ConfigParser {
     }
     return r;
   }
-  public static HashMap avalieConfig(ParseTree config){ //gets all configs from a device
+  public static HashMap<String,ArrayList<String>> avalieConfig(ParseTree config){ //gets all configs from a device
     HashMap<String,ArrayList<String>> r = new HashMap<>();
     avalieConfigRec(config,r);
     return r;
   }
-  public static HashMap avalieConfig(ParseTree config, String[] args){  //gets specified configs from a device
+  public static HashMap<String,ArrayList<String>> avalieConfig(ParseTree config, String[] args){  //gets specified configs from a device
     HashMap<String,ArrayList<String>> r = new HashMap<>();
     avalieConfigRec(config,r,args);
     return r;

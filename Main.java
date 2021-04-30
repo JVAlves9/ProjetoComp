@@ -8,13 +8,14 @@ import java.nio.file.NoSuchFileException;
 class Main {
   public static void main(String[] args) throws Exception {
     
-    HashMap<String,HashMap> arquivoLido = salvaIni("from config.ini in device_3 device_1");
+    HashMap<String,? extends Object> arquivoLido = salvaIni("from config.ini in device_3 device_1");
     
-    System.out.println(arquivoLido);
+		System.out.println("Key type\t\t\t\t\tValue Type"+"\n"+arquivoLido.keySet().toArray()[0].getClass()+"\t\t\t"+arquivoLido.values().toArray()[0].getClass()+"\n");
+    System.out.println("arquivoLido = "+arquivoLido);
     
   }
 
-  public static HashMap salvaIni(String coman){
+  public static HashMap<String,? extends Object> salvaIni(String coman){
     CharStream src = CharStreams.fromString(coman);
     DSLLexer lexer = new DSLLexer(src);
     TokenStream tkStream = new CommonTokenStream(lexer);
@@ -26,13 +27,13 @@ class Main {
       return null;
 	  }
 // Na linha de baixo ele cria o hashmap pra armazenar e chama a função pra armazenar de acordo com o comando
-    HashMap<String,HashMap> arqui = avalieDsl(lf);
+    HashMap<String,? extends Object> arqui = avalieDsl(lf);
     return arqui;
   }
 
 
-  static HashMap avalieDsl(DSLParser.LoadfileContext exp){
-    HashMap<String,HashMap> r = new HashMap<>();
+  static HashMap<String,? extends Object> avalieDsl(DSLParser.LoadfileContext exp){
+    HashMap<String,? extends Object> r = new HashMap<>();
     if (exp.load() instanceof DSLParser.LoadConfigContext) {
       ParseTree com = ConfigParser.getParser(exp.getChild(2).getText());
       r = ConfigParser.avalie(com);
