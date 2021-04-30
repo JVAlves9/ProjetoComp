@@ -3,7 +3,7 @@
 export CLASSPATH=antlr.jar:generated
 
 run: generated/*.class
-	java  Main
+	java Main
 
 generated/*.class : *.java generated/*.java
 	javac -d generated *.java generated/*.java
