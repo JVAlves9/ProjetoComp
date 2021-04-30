@@ -5,7 +5,7 @@ Este arquivo deve possuir PELO MENOS as seguintes seções:
 
 1- Equipe do projeto
   Alunos:
-  João Victor Alves
+  João Victor Alves Marques de Sá
   Thiago Porfírio Félix de Santana
   
 2- Motivação
