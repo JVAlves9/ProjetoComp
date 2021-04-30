@@ -1,4 +1,4 @@
-grammar DLS;
+grammar DSL;
 
 start: loadfile EOF;
 
@@ -13,7 +13,7 @@ options:
    (NAME ' ')* NAME
   ;
 
-NAME    : ([A-Za-z0-9]SPECIAL_CHARS*)+;
+NAME    : (SPECIAL_CHARS?[A-Za-z0-9]SPECIAL_CHARS?)+;
 BLANK   : ('\n' | '\t' )+  -> skip ;
 
 fragment SPECIAL_CHARS : '_' | '-' | '$' | '@' | '&' | '/' | '\\' | '.' | ':';

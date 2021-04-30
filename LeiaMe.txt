@@ -4,9 +4,9 @@ de compiladores.
 Este arquivo deve possuir PELO MENOS as seguintes seções:
 
 1- Equipe do projeto
-
+  Alunos:
   João Victor Alves
-  Thiago Porfírio
+  Thiago Porfírio Félix de Santana
   
 2- Motivação
 
@@ -15,8 +15,66 @@ Este arquivo deve possuir PELO MENOS as seguintes seções:
 
 3- Exemplos da Linguagem e do Resultado Esperado
 
+  "from config.ini load"                      ->  Carrega o todas as seções e suas configurações do arquivo config.ini retornando um HashMap<String,HashMap>, sendo a String o nome da seção e o HashMap as configurações no formato <String,ArrayList>
+
+  "from config.ini in device_1 device_2"      ->  Carrega todas as configurações das seções especificadas, retorna um HashMap<String,HashMap>, sendo a String o nome da seção e o HashMap as configurações no formato <String,ArrayList>
+
+  "from config.ini in device_1 load ip port"  ->  Carrega as configurações especificadas de uma certa seção, retorna um HashMap<String,ArrayList> sendo String o nome da configuração e ArrayList os valores dela
+
 4 - Gramática da Linguagem
+ 
+ Utilizamos duas Gramáticas, a Gramática "Projeto.e4" que define a estrutura do arquivo.ini e a gramática "DLS.e4" feita como linguagem de domínio espécifico para carregar os dados do arquivo .ini da maneira desejada.
+
+  DSL.e4
+        grammar DSL;
+
+    start: loadfile EOF;
+
+    loadfile: 'from' ' ' NAME ' ' load;// ler o nome do arquivo a ser carregado
+
+    load:  'load'#LoadConfig         //ler todas as configs de todas sessões do arquivo 
+    | 'in' ' ' NAME ' ' 'load' ' ' options#LoadWithOptions    //ler algumas configs de uma seção 
+    | 'in' ' ' options#LoadSpecificConfigs   //ler todas as configs de algumas seções 
+    ;
+
+    options: 
+      (NAME ' ')* NAME  //nome 
+      ;
+
+    NAME    : (SPECIAL_CHARS?[A-Za-z0-9]SPECIAL_CHARS?)+; // [NAME]variavel não terminal que reconhece nome dos arquivos sessões cujo podem ter letras maiusculas, minúsculas e caracteres especiais
+    BLANK   : ('\n' | '\t' )+  -> skip ; // para ignorar os espaços vazios e quebras de linha
+
+    fragment SPECIAL_CHARS : '_' | '-' | '$' | '@' | '&' | '/' | '\\' | '.' | ':';// caracteres especiais
+
+  Projeto.e4
+    grammar Projeto;
+
+    start: config+ EOF;
+
+    config: '[' NAMES ']' '\n' (expr '\n' | expr )+ '\n'?#DeviceConfig;// define as sessões
+
+    expr: NAMES '=' valor   #Atribuicao     //define as atribuições simples
+        | NAMES '=' (valor ',')+ valor  #AtribuicaoLista  //define as atribuições de lista
+        ;
+
+    valor: NAMES  #Names  // a variavel não terminal "valor" seria o conteudo das configs da sessão
+        |  VNUM   #Num
+        ;
+
+    NAMES   : (SPECIAL_CHARS?[A-Za-z0-9]SPECIAL_CHARS?)+;
+    VNUM    : [0-9]+;
+    BLANK   : ( ' ' | '\t' )+  -> skip ;
+    COMMENT : ('#'.*?'\n' | ';'.*?'\n') -> skip ;
+
+    fragment SPECIAL_CHARS : '_' | '-' | '$' | '@' | '&' | '/' | '\\' | '.' | ':' | '"' | '%' | '~';
 
 5 - Descrição do Processo de Geração de Código ou execução
 
+  A string especificando o que vai ser carregado é passada para o salvaIni(). O salvaIni() inicializa o lexer, faz a tokenização e inicia o parser. O avalieDsl() inicia a verificação da árvore criado a partir da string, identificando o arquivo a ser analizado e as informações a serem analizadas.
+  Então, a função busca a árvore relacionada com o arquivo .ini que foi pedido. Depois de passar pelo getParser(), dependendo das configurações que estavam na string, ele chama um dos métodos do ConfigParser. Esse método vai analisar as informações da árvore recebida e devolver um HashMap de acordo com as configurações pedidas.
+
 6 - Manual de uso do software.
+
+  Na classe Main.java é feito o armazenamento das configurações do arquivo a partir da função "salvaIni" que recebe uma string com os comandos que obedeçam a linguagem definida pela Gramática "DLS.e4".
+
+  Para rodar o programa rapidamente, modifique a string no salvaIni nessa linha do método main na classe Main: HashMap<String,HashMap> arquivoLido = salvaIni("escreva aqui sua entrada");.

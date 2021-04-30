@@ -12,9 +12,9 @@ valor: NAMES  #Names
     |  VNUM   #Num
     ;
 
-NAMES   : ([A-Za-z0-9]SPECIAL_CHARS*)+;
+NAMES   : (SPECIAL_CHARS?[A-Za-z0-9]SPECIAL_CHARS?)+;
 VNUM    : [0-9]+;
 BLANK   : ( ' ' | '\t' )+  -> skip ;
 COMMENT : ('#'.*?'\n' | ';'.*?'\n') -> skip ;
 
-fragment SPECIAL_CHARS : '_' | '-' | '$' | '@' | '&' | '/' | '\\' | '.' | ':';
+fragment SPECIAL_CHARS : '_' | '-' | '$' | '@' | '&' | '/' | '\\' | '.' | ':' | '"' | '%' | '~';

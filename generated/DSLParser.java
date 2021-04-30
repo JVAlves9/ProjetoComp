@@ -1,4 +1,4 @@
-// Generated from DLS.e4 by ANTLR 4.9.2
+// Generated from DSL.e4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class DLSParser extends Parser {
+public class DSLParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -72,7 +72,7 @@ public class DLSParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "DLS.e4"; }
+	public String getGrammarFileName() { return "DSL.e4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -83,7 +83,7 @@ public class DLSParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public DLSParser(TokenStream input) {
+	public DSLParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -92,18 +92,18 @@ public class DLSParser extends Parser {
 		public LoadfileContext loadfile() {
 			return getRuleContext(LoadfileContext.class,0);
 		}
-		public TerminalNode EOF() { return getToken(DLSParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(DSLParser.EOF, 0); }
 		public StartContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_start; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLSListener ) ((DLSListener)listener).enterStart(this);
+			if ( listener instanceof DSLListener ) ((DSLListener)listener).enterStart(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLSListener ) ((DLSListener)listener).exitStart(this);
+			if ( listener instanceof DSLListener ) ((DSLListener)listener).exitStart(this);
 		}
 	}
 
@@ -131,7 +131,7 @@ public class DLSParser extends Parser {
 	}
 
 	public static class LoadfileContext extends ParserRuleContext {
-		public TerminalNode NAME() { return getToken(DLSParser.NAME, 0); }
+		public TerminalNode NAME() { return getToken(DSLParser.NAME, 0); }
 		public LoadContext load() {
 			return getRuleContext(LoadContext.class,0);
 		}
@@ -141,11 +141,11 @@ public class DLSParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_loadfile; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLSListener ) ((DLSListener)listener).enterLoadfile(this);
+			if ( listener instanceof DSLListener ) ((DSLListener)listener).enterLoadfile(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLSListener ) ((DLSListener)listener).exitLoadfile(this);
+			if ( listener instanceof DSLListener ) ((DSLListener)listener).exitLoadfile(this);
 		}
 	}
 
@@ -196,37 +196,37 @@ public class DLSParser extends Parser {
 		public LoadSpecificConfigsContext(LoadContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLSListener ) ((DLSListener)listener).enterLoadSpecificConfigs(this);
+			if ( listener instanceof DSLListener ) ((DSLListener)listener).enterLoadSpecificConfigs(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLSListener ) ((DLSListener)listener).exitLoadSpecificConfigs(this);
+			if ( listener instanceof DSLListener ) ((DSLListener)listener).exitLoadSpecificConfigs(this);
 		}
 	}
 	public static class LoadConfigContext extends LoadContext {
 		public LoadConfigContext(LoadContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLSListener ) ((DLSListener)listener).enterLoadConfig(this);
+			if ( listener instanceof DSLListener ) ((DSLListener)listener).enterLoadConfig(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLSListener ) ((DLSListener)listener).exitLoadConfig(this);
+			if ( listener instanceof DSLListener ) ((DSLListener)listener).exitLoadConfig(this);
 		}
 	}
 	public static class LoadWithOptionsContext extends LoadContext {
-		public TerminalNode NAME() { return getToken(DLSParser.NAME, 0); }
+		public TerminalNode NAME() { return getToken(DSLParser.NAME, 0); }
 		public OptionsContext options() {
 			return getRuleContext(OptionsContext.class,0);
 		}
 		public LoadWithOptionsContext(LoadContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLSListener ) ((DLSListener)listener).enterLoadWithOptions(this);
+			if ( listener instanceof DSLListener ) ((DSLListener)listener).enterLoadWithOptions(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLSListener ) ((DLSListener)listener).exitLoadWithOptions(this);
+			if ( listener instanceof DSLListener ) ((DSLListener)listener).exitLoadWithOptions(this);
 		}
 	}
 
@@ -291,9 +291,9 @@ public class DLSParser extends Parser {
 	}
 
 	public static class OptionsContext extends ParserRuleContext {
-		public List<TerminalNode> NAME() { return getTokens(DLSParser.NAME); }
+		public List<TerminalNode> NAME() { return getTokens(DSLParser.NAME); }
 		public TerminalNode NAME(int i) {
-			return getToken(DLSParser.NAME, i);
+			return getToken(DSLParser.NAME, i);
 		}
 		public OptionsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -301,11 +301,11 @@ public class DLSParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_options; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLSListener ) ((DLSListener)listener).enterOptions(this);
+			if ( listener instanceof DSLListener ) ((DSLListener)listener).enterOptions(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLSListener ) ((DLSListener)listener).exitOptions(this);
+			if ( listener instanceof DSLListener ) ((DSLListener)listener).exitOptions(this);
 		}
 	}
 

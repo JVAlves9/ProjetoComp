@@ -10,4 +10,4 @@ generated/*.class : *.java generated/*.java
 
 generated/*.java : Projeto.e4
 	java -jar antlr.jar -o generated Projeto.e4
-	java -jar antlr.jar -o generated DLS.e4
+	java -jar antlr.jar -o generated DSL.e4
